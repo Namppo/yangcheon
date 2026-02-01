@@ -48,13 +48,18 @@ img{ max-width:100%; display:block; }
     align-items:center;
     gap: 10px;
 }
-.brand__mark{
+
+/* 기존 .brand__mark 대신 실제 로고 이미지 사용 */
+.brand__logo{
     width: 42px;
     height: 42px;
     border-radius: 12px;
-    background: linear-gradient(135deg, var(--green), #16a34a);
-    box-shadow: 0 14px 30px rgba(14,164,74,.22);
+    object-fit: contain;
+    background: #fff;
+    box-shadow: 0 14px 30px rgba(16,24,40,.12);
+    border: 1px solid rgba(16,24,40,.08);
 }
+
 .brand__text{ line-height: 1.15; }
 .brand__name{ display:block; font-size: 18px; letter-spacing: -.2px; }
 .brand__sub{ display:block; font-size: 12px; color: var(--muted); }
