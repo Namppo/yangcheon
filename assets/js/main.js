@@ -1,32 +1,40 @@
 window.App = (() => {
     const heroImages = [
-        { left: "assets/img/hero-1.jpg", mid: "assets/img/hero-2.jpg", right: "assets/img/hero-3.jpg" },
-        { left: "assets/img/hero-2.jpg", mid: "assets/img/hero-3.jpg", right: "assets/img/hero-1.jpg" },
-        { left: "assets/img/hero-3.jpg", mid: "assets/img/hero-1.jpg", right: "assets/img/hero-2.jpg" }
+        "assets/img/hero-1.jpg",
+        "assets/img/hero-2.jpg",
+        "assets/img/hero-3.jpg"
     ];
 
     let idx = 0;
+    let timerId = null;
 
     function setHero(i){
         idx = (i + heroImages.length) % heroImages.length;
-        const set = heroImages[idx];
 
-        const left = document.querySelector(".hero__panel--left");
-        const mid = document.querySelector(".hero__panel--mid");
-        const right = document.querySelector(".hero__panel--right");
+        const slide = document.querySelector(".hero__slide");
+        if (!slide) return;
 
-        if (!left || !mid || !right) return;
+        slide.style.backgroundImage = `url('${heroImages[idx]}')`;
+    }
 
-        left.style.backgroundImage = `url('${set.left}')`;
-        mid.style.backgroundImage = `url('${set.mid}')`;
-        right.style.backgroundImage = `url('${set.right}')`;
+    function restartAuto(){
+        if (timerId) window.clearInterval(timerId);
+        timerId = window.setInterval(() => setHero(idx + 1), 5000);
     }
 
     function bindHeroNav(){
         const prev = document.querySelector(".hero__nav--prev");
         const next = document.querySelector(".hero__nav--next");
-        prev?.addEventListener("click", () => setHero(idx - 1));
-        next?.addEventListener("click", () => setHero(idx + 1));
+
+        prev?.addEventListener("click", () => {
+            setHero(idx - 1);
+            restartAuto();
+        });
+
+        next?.addEventListener("click", () => {
+            setHero(idx + 1);
+            restartAuto();
+        });
     }
 
     function bindActiveMenu(){
@@ -61,9 +69,10 @@ window.App = (() => {
     }
 
     function init(){
-        setHero(0);
+        setHero(0);        // 처음은 hero-1
         bindHeroNav();
         bindActiveMenu();
+        restartAuto();     // 5초마다 hero-2, hero-3, hero-1...
     }
 
     document.addEventListener("DOMContentLoaded", init);
