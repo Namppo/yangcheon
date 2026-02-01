@@ -1,57 +1,318 @@
 <!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>양천구 리틀야구단</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="양천구 리틀야구단 공식 홈페이지">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>리틀야구단</title>
+  <meta name="description" content="리틀야구단 공식 홈페이지" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 
-<header class="header">
-  <h1>⚾ 양천구 리틀야구단</h1>
-  <nav>
-    <a href="index.html">홈</a>
-    <a href="gallery.html">사진갤러리</a>
-    <a href="contact.html">문의</a>
-  </nav>
+<!-- Top mini bar -->
+<div class="topbar">
+  <div class="container topbar__inner">
+    <div class="brand">
+      <div class="brand__mark" aria-hidden="true"></div>
+      <div class="brand__text">
+        <strong class="brand__name">리틀야구단</strong>
+        <span class="brand__sub">Little Baseball Club</span>
+      </div>
+    </div>
+    <div class="topbar__right">
+      <span class="topbar__label">가입상담</span>
+      <a class="topbar__tel" href="tel:[전화번호]">[전화번호]</a>
+    </div>
+  </div>
+</div>
+
+<!-- Hero -->
+<header class="hero" id="home">
+  <div class="container hero__wrap">
+    <div class="hero__stage" aria-label="메인 비주얼">
+      <div class="hero__panel hero__panel--left" data-hero="1"></div>
+      <div class="hero__panel hero__panel--mid" data-hero="2"></div>
+      <div class="hero__panel hero__panel--right" data-hero="3"></div>
+
+      <div class="hero__caption">
+        <p class="hero__kicker">야구야 놀자!</p>
+        <h1 class="hero__title">마음껏 야구의 즐거움을 함께 배우는<br/>리틀야구단에 오신 것을 환영합니다.</h1>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#contact">가입 상담</a>
+          <a class="btn" href="#gallery">갤러리</a>
+        </div>
+      </div>
+
+      <button class="hero__nav hero__nav--prev" type="button" aria-label="이전 이미지">‹</button>
+      <button class="hero__nav hero__nav--next" type="button" aria-label="다음 이미지">›</button>
+
+      <a class="float-call" href="tel:[전화번호]" aria-label="전화 상담">
+        ☎
+      </a>
+    </div>
+
+    <!-- Bottom menu (like overlay bar) -->
+    <nav class="menubar" aria-label="섹션 메뉴">
+      <a href="#intro">야구단소개</a>
+      <a href="#weekend">주말반</a>
+      <a href="#nurturing">육성반</a>
+      <a href="#player">선수반</a>
+      <a href="#location">위치</a>
+    </nav>
+  </div>
 </header>
 
-<section class="hero">
-  <h2>꿈을 키우는 야구</h2>
-  <p>양천구 리틀야구단은 아이들의 성장과 팀워크를 응원합니다.</p>
-</section>
+<main>
 
-<main class="container">
+  <!-- INTRO -->
+  <section class="section section--tight" id="intro">
+    <div class="container">
+      <div class="section__head">
+        <h2 class="section__title">야구단 소개</h2>
+        <p class="section__desc">아이들의 성장, 팀워크, 기본기를 함께 만들어갑니다.</p>
+      </div>
 
-  <section class="card">
-    <h3>⚾ 구단 소개</h3>
-    <p>
-      양천구 리틀야구단은 어린 선수들이 야구를 통해
-      협동심과 도전 정신을 배우는 것을 목표로 합니다.
-    </p>
+      <div class="cards">
+        <article class="card">
+          <h3 class="card__title">리틀야구단만의 장점</h3>
+          <ul class="checklist">
+            <li>주말 중심 운영 (대회/활동은 안내에 따라 조정)</li>
+            <li>기본기 · 체력 · 연습게임 · 예의범절</li>
+            <li>집중력/사회성 향상에 도움</li>
+            <li>안전 최우선 훈련</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3 class="card__title">가입 상담</h3>
+          <p class="big-tel">[전화번호]</p>
+          <p class="muted">야구를 좋아하는 아이들이라면 누구나 환영합니다.</p>
+          <div class="card__actions">
+            <a class="btn btn--primary" href="#contact">상담 남기기</a>
+            <a class="btn" href="tel:[전화번호]">전화하기</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3 class="card__title">연맹/협회 안내</h3>
+          <p class="muted">필요한 문구를 고정 안내문으로 구성할 수 있습니다.</p>
+          <div class="badge-grid" aria-label="연맹/협회 배지">
+            <span class="badge">대한체육회</span>
+            <span class="badge">대한야구협회</span>
+            <span class="badge badge--strong">한국리틀야구연맹</span>
+            <span class="badge">교육기관 협력</span>
+            <span class="badge">지역 연계</span>
+            <span class="badge">유소년 대회</span>
+          </div>
+        </article>
+      </div>
+    </div>
   </section>
 
-  <section class="card">
-    <h3>📢 공지사항</h3>
-    <ul>
-      <li>2026 시즌 신입 선수 모집 중</li>
-      <li>동계 훈련 일정 안내</li>
-    </ul>
+  <!-- WEEKEND (table + image + checklist box like screenshot) -->
+  <section class="section" id="weekend">
+    <div class="container">
+      <div class="section__head">
+        <h2 class="section__title">주말반</h2>
+        <p class="section__desc">초등학교 대상(예시) · 시간/장소는 운영에 맞게 수정</p>
+      </div>
+
+      <div class="info-table">
+        <div class="info-table__row info-table__row--head">
+          <div>구분</div><div>시간</div><div>대상</div><div>내용</div><div>대회</div><div>장소</div>
+        </div>
+        <div class="info-table__row">
+          <div>주말반<br/>(토/일)</div>
+          <div>14:00 ~ 16:00<br/>(2시간)</div>
+          <div>초등학교<br/>1~6학년</div>
+          <div>기본기 · 체력훈련<br/>연습게임 · 예의범절</div>
+          <div>연 4회<br/>(운영 기준)</div>
+          <div>[훈련장/구장명]<br/>(픽업 가능 안내 등)</div>
+        </div>
+      </div>
+
+      <div class="split">
+        <div class="split__media" style="background-image:url('assets/img/grid-1.jpg')"></div>
+        <div class="split__box">
+          <h3 class="split__title">주말반 핵심 포인트</h3>
+          <ul class="checklist">
+            <li>기본기 중심 커리큘럼</li>
+            <li>균형 발달/체력 향상</li>
+            <li>규칙과 예절 교육</li>
+            <li>팀워크 강화</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section class="card">
-    <h3>📸 사진 갤러리</h3>
-    <p>훈련, 경기, 대회 단체사진을 확인하세요.</p>
-    <a class="btn" href="gallery.html">갤러리 바로가기</a>
+  <!-- NURTURING -->
+  <section class="section section--alt" id="nurturing">
+    <div class="container">
+      <div class="section__head">
+        <h2 class="section__title">육성반</h2>
+        <p class="section__desc">기본기 강화 + 포지션별 훈련(고정 안내문)</p>
+      </div>
+
+      <div class="cards cards--2">
+        <article class="card">
+          <h3 class="card__title">훈련 내용</h3>
+          <ul class="bullets">
+            <li>타격/수비/주루 기초 루틴</li>
+            <li>포지션 이해 및 실전 적용</li>
+            <li>부상 방지 스트레칭/체력</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3 class="card__title">운영 안내</h3>
+          <ul class="bullets">
+            <li>시간: [요일/시간]</li>
+            <li>장소: [장소]</li>
+            <li>준비물: 글러브/운동화 등</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAYER -->
+  <section class="section" id="player">
+    <div class="container">
+      <div class="section__head">
+        <h2 class="section__title">선수반</h2>
+        <p class="section__desc">대회 참가/실전 중심(고정 안내문)</p>
+      </div>
+
+      <div class="cards cards--3">
+        <article class="card">
+          <h3 class="card__title">대회/실전</h3>
+          <p class="muted">운영 방침에 맞게 대회 일정/참가 기준을 고정 안내로 적습니다.</p>
+        </article>
+        <article class="card">
+          <h3 class="card__title">코칭 방향</h3>
+          <p class="muted">기술 + 멘탈 + 팀 규율을 균형 있게 운영합니다.</p>
+        </article>
+        <article class="card">
+          <h3 class="card__title">선발/참여</h3>
+          <p class="muted">테스트/상담 후 참여 가능(예시 문구)처럼 고정 문장으로 구성합니다.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY PREVIEW -->
+  <section class="section section--tight" id="gallery">
+    <div class="container gallery">
+      <div class="gallery__left">
+        <p class="gallery__kicker">Photo gallery</p>
+        <h2 class="section__title">야구단 갤러리</h2>
+        <p class="muted">훈련/경기/대회 사진을 확인하세요.</p>
+        <a class="btn btn--primary" href="#contact">상담 바로가기</a>
+      </div>
+
+      <div class="gallery__grid">
+        <a class="thumb" href="assets/img/grid-1.jpg" target="_blank" rel="noreferrer">
+          <img src="assets/img/grid-1.jpg" alt="갤러리 사진 1" />
+        </a>
+        <a class="thumb" href="assets/img/grid-2.jpg" target="_blank" rel="noreferrer">
+          <img src="assets/img/grid-2.jpg" alt="갤러리 사진 2" />
+        </a>
+        <a class="thumb" href="assets/img/grid-3.jpg" target="_blank" rel="noreferrer">
+          <img src="assets/img/grid-3.jpg" alt="갤러리 사진 3" />
+        </a>
+        <a class="thumb" href="assets/img/grid-4.jpg" target="_blank" rel="noreferrer">
+          <img src="assets/img/grid-4.jpg" alt="갤러리 사진 4" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION (image background like screenshot) -->
+  <section class="location" id="location">
+    <div class="location__bg" aria-hidden="true"></div>
+    <div class="container location__inner">
+      <p class="location__kicker">Location</p>
+      <h2 class="location__title">찾아오시는 길</h2>
+      <p class="location__desc">[주소] · [대중교통 안내] · [주차 안내]</p>
+      <a class="btn btn--ghost" href="[지도링크]" target="_blank" rel="noreferrer">지도 바로가기</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section__head">
+        <h2 class="section__title">상담/문의</h2>
+        <p class="section__desc">정적 사이트라 “제출”은 안내용입니다. 원하시면 실제 전송(메일/폼/서버)도 붙여드릴 수 있어요.</p>
+      </div>
+
+      <div class="cards cards--2">
+        <article class="card">
+          <h3 class="card__title">고객센터</h3>
+          <p class="muted">전화 상담이 가장 빠릅니다.</p>
+          <p class="big-tel">[전화번호]</p>
+          <a class="btn btn--primary" href="tel:[전화번호]">전화하기</a>
+        </article>
+
+        <article class="card">
+          <h3 class="card__title">문의 남기기</h3>
+          <form class="form" onsubmit="return window.App.fakeSubmit(event)">
+            <label class="field">
+              <span>이름</span>
+              <input required placeholder="예: 홍길동" />
+            </label>
+            <label class="field">
+              <span>연락처</span>
+              <input required placeholder="예: [전화번호]" />
+            </label>
+            <label class="field">
+              <span>내용</span>
+              <textarea required placeholder="입단 문의 / 일정 문의 등"></textarea>
+            </label>
+            <button class="btn" type="submit">내용 확인</button>
+            <p class="form__result" id="formResult" hidden></p>
+          </form>
+        </article>
+      </div>
+    </div>
   </section>
 
 </main>
 
 <footer class="footer">
-  <p>© 양천구 리틀야구단</p>
+  <div class="container footer__grid">
+    <div>
+      <h3 class="footer__title">야구단 대회 리스트</h3>
+      <ul class="footer__list">
+        <li>· [대회명/연도] (예시)</li>
+        <li>· [대회명/연도] (예시)</li>
+        <li>· [대회명/연도] (예시)</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="footer__title">CUSTOMER CENTER</h3>
+      <p class="footer__tel">[전화번호]</p>
+      <p class="footer__muted">상담 가능 시간: [시간]</p>
+    </div>
+
+    <div>
+      <h3 class="footer__title">오시는 길</h3>
+      <p class="footer__muted">[주소]</p>
+      <a class="footer__link" href="[지도링크]" target="_blank" rel="noreferrer">지도 보기</a>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <small>© <span id="y"></span> 리틀야구단. All rights reserved.</small>
+    <a class="to-top" href="#home" aria-label="위로">↑</a>
+  </div>
 </footer>
 
+<script src="assets/js/main.js"></script>
+<script>
+  document.getElementById("y").textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
