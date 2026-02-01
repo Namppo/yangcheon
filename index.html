@@ -2,347 +2,41 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RACE COMPANY</title>
-  <!-- Bootstrap CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
-  <style>
-    /* 공통 색상/배경 정의 */
-    :root {
-      --main-bg-color: #121212;  /* 전체 배경(어두운 톤) */
-      --main-text-color: #ffffff; /* 기본 글자색(흰색) */
-      --accent-color: #dc3545;    /* 포인트(빨간) */
-    }
-  
-    body {
-      background-color: var(--main-bg-color);
-      color: var(--main-text-color);
-      margin: 0;
-      padding: 0;
-      font-family: "Noto Sans KR", sans-serif;
-    }
-  
-    /* 네비게이션 바 (TOP 영역) */
-    .navbar {
-      background-color: #fff; /* 하얀색 배경 */
-    }
-    .navbar-brand,
-    .nav-link {
-      color: #000 !important; /* 검정색 텍스트 */
-    }
-    .nav-link:hover {
-      color: var(--accent-color) !important; /* hover 시 빨간색 */
-    }
-  
-    /* 메인 배너(히어로 섹션) */
-    .hero-section {
-      position: relative;
-      background: url('images/banner.png') center center no-repeat;
-      background-size: cover;
-      min-height: 70vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    .hero-section::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* 어두운 오버레이 */
-      z-index: 1;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .hero-content h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
-    .hero-content p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-    }
-    .hero-btn {
-      background-color: var(--accent-color);
-      color: #fff;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 4px;
-      transition: background 0.3s;
-    }
-    .hero-btn:hover {
-      background-color: #c82333; /* 살짝 어두운 빨간색 */
-    }
-  
-    /* 섹션 타이틀 스타일 */
-    .section-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      color: #fff;
-    }
-  
-    /* 배관 시공 / 내시경 검사 소개 섹션 (기본 dark-section 스타일) */
-    .dark-section {
-      background-color: #1c1c1c;
-      padding: 60px 0;
-    }
-    .dark-section .card {
-      background-color: #2a2a2a;
-      border: none;
-      border-radius: 8px;
-    }
-    .dark-section .card h5,
-    .dark-section .card p {
-      color: #fff;
-    }
-  
-    /* 시공사례 섹션 - 전체 배경 흰색 */
-    .cases-section {
-      background-color: #fff; /* 섹션 전체 흰색 */
-      padding: 60px 0;
-    }
-    /* 시공사례 섹션 내 제목 스타일 (여기선 검정 글자) */
-    .cases-section .section-title {
-      text-align: left;
-      color: #000; /* 제목은 검정색으로 */
-    }
-    /* 각 줄(케이스) 공통 스타일 */
-    .case-line {
-      padding: 15px;
-      margin-bottom: 10px;
-      font-size: 1rem;
-      border-radius: 4px; /* 모서리 살짝 둥글게 (선택) */
-    }
-    /* 검정 배경 + 흰색 텍스트 */
-    .case-line.black-bg {
-      background-color: #000;
-      color: #fff;
-    }
-    /* 흰색 배경 + 검정 텍스트 */
-    .case-line.white-bg {
-      background-color: #fff;
-      color: #000;
-    }
-  
-    /* 푸터 */
-    footer {
-      background-color: #000;
-      padding: 20px 0;
-      text-align: center;
-      color: #aaa;
-      font-size: 0.9rem;
-    }
-  
-    /* 링크 색상 */
-    a {
-      color: var(--accent-color);
-      text-decoration: none;
-    }
-    a:hover {
-      color: #fff;
-    }
-  
-    /* -----------------------------
-       배관 시공 / 내시경 검사 섹션 추가 스타일
-    ------------------------------ */
-    /* 서비스 항목 기본 스타일 (텍스트 왼쪽 정렬) */
-    .dark-section .service-item {
-      text-align: left; /* 텍스트 왼쪽 정렬 */
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 2rem;
-    }
-    /* 왼쪽 항목: 배관 시공 – 약간 밝은 배경 */
-    .dark-section .service-item.left-item {
-      background-color: #242424;
-    }
-    /* 오른쪽 항목: 내시경 검사 – 약간 어두운 배경 */
-    .dark-section .service-item.right-item {
-      background-color: #1e1e1e;
-    }
-    /* 서비스 항목 제목 */
-    .dark-section .service-item h3 {
-      font-size: 1.8rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-      color: #fff;
-    }
-    /* 목록 스타일 (빨간 불릿 적용) */
-    .custom-bullet {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .custom-bullet li {
-      position: relative;
-      padding-left: 20px; /* 불릿 공간 확보 */
-      margin-bottom: 0.8rem;
-    }
-    .custom-bullet li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: var(--accent-color); /* 빨간색 포인트 */
-    }
-    /* 서비스 아이콘 스타일 (Font Awesome 사용 시) */
-    .service-icon {
-      font-size: 40px;
-      margin-bottom: 1rem;
-      color: var(--accent-color);
-    }
-
-    /* 반응형 - 모바일에서 폰트 크기 축소 */
-    @media (max-width: 576px) {
-      .hero-content h1 {
-        font-size: 1.8rem;
-        margin-bottom: 0.8rem;
-      }
-      .hero-content p {
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
-      }
-      .hero-btn {
-        font-size: 0.9rem;
-        padding: 0.6rem 1rem;
-      }
-    }
-  </style>
+  <title>양천구 리틀야구단</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <!-- 네비게이션 바 -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="#">
-        <!-- 첨부한 파일: logo.jpg 로고 사용 -->
-          <img
-          src="images/logo.jpg"
-          alt="Race Company Logo"
-          style="height: 60px; width: auto; margin-right: 8px;"
-        />
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#hero">회사소개</a></li>
-          <li class="nav-item"><a class="nav-link" href="#service">서비스</a></li>
-          <li class="nav-item"><a class="nav-link" href="#cases">시공사례</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">문의하기</a></li>
-        </ul>
-      </div>
-    </div>
+
+<header>
+  <h1>⚾ 양천구 리틀야구단</h1>
+  <nav>
+    <a href="index.html">홈</a>
+    <a href="about.html">구단소개</a>
+    <a href="team.html">선수단</a>
+    <a href="schedule.html">경기일정</a>
+    <a href="contact.html">문의</a>
   </nav>
+</header>
 
-  <!-- 메인 배너 -->
-  <section id="hero" class="hero-section">
-    <div class="hero-content">
-      <h1>배관 시공부터 내시경 검사까지,<br>RACE COMPANY가 책임지겠습니다.</h1>
-      <p>PVC 배관 설치 및 점검, 내시경 검사 전문<br>정확한 기술, 책임감 있는 시공</p>
-      <a href="https://open.kakao.com/o/sVCWotwh" target="_blank" class="hero-btn">상담 문의</a>
-    </div>
+<main>
+  <section class="hero">
+    <h2>꿈을 키우는 야구, 양천구 리틀야구단</h2>
+    <p>아이들의 성장과 팀워크를 소중히 여깁니다.</p>
   </section>
 
-  <!-- 배관 시공 / 내시경 검사 섹션 -->
-  <section id="service" class="dark-section">
-    <div class="container">
-      <div class="row">
-        <!-- 왼쪽 항목: 배관 시공 -->
-        <div class="col-md-6 mb-4 service-item left-item">
-          <div class="mb-3">
-            <i class="fas fa-tools service-icon"></i>
-          </div>
-          <h3 class="fw-bold mb-3">배관 시공</h3>
-          <ul class="custom-bullet">
-            <li>아파트, 오피스텔, 상업용 건물</li>
-            <li>선홈통, PVC입상배관, PVC자재, DRF, DTS 등 다양한 자재 사용</li>
-            <li>LH BENT(가지관) 설계부터 시공, 점검까지 원스톱 제공</li>
-          </ul>
-        </div>
-        <!-- 오른쪽 항목: 내시경 검사 -->
-        <div class="col-md-6 mb-4 service-item right-item">
-          <div class="mb-3">
-            <i class="fas fa-search service-icon"></i>
-          </div>
-          <h3 class="fw-bold mb-3">내시경 검사</h3>
-          <ul class="custom-bullet">
-            <li>배관 내부 교차/막힘 여부 검사</li>
-            <li>시공 결함 및 누수 지점 정확 파악</li>
-            <li>빠른 문제 해결과 비용 절감 효과</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+  <section>
+    <h3>공지사항</h3>
+    <ul>
+      <li>2026 시즌 신입 선수 모집 중</li>
+      <li>2월 훈련 일정 공지</li>
+    </ul>
   </section>
+</main>
 
-  <!-- 시공사례 섹션 -->
-  <section id="cases" class="cases-section">
-    <div class="container">
-      <!-- 섹션 제목 (검정 글씨) -->
-      <h2 class="section-title text-center" style="color: #000;">시공 사례</h2>
-      
-      <!-- 1번째 줄: 검정 배경 + 흰색 글자 -->
-      <div class="case-line black-bg">
-        서울 강남구 신축오피스 배관 숄체인 배관설치
-      </div>
-      
-      <!-- 2번째 줄: 흰색 배경 + 검정 글자 -->
-      <div class="case-line white-bg">
-        경기 화성공장 점검
-      </div>
-      
-      <!-- 3번째 줄: 검정 배경 + 흰색 글자 -->
-      <div class="case-line black-bg">
-        인천 남동공단 PVC 배관 시공
-      </div>
-      
-      <!-- 4번째 줄: 흰색 배경 + 검정 글자 -->
-      <div class="case-line white-bg">
-        부산 기장공단 배관 교체 공사
-      </div>
-    </div>
-  </section>
+<footer>
+  <p>© 양천구 리틀야구단</p>
+</footer>
 
-  <!-- 문의 섹션 (연락처) -->
-  <section id="contact" class="dark-section">
-    <div class="container">
-      <h2 class="section-title text-center">문의하기</h2>
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <p class="mb-1">전화: <a href="tel:010-4512-0989">010-4512-0989</a></p>
-          <p class="mb-3">이메일: <a href="mailto:info@racecompany.com">info@racecompany.com</a></p>
-          <p>궁금하신 점이나 견적 문의는 언제든지 연락주세요. 빠른 답변 약속드립니다.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 푸터 -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 RACE COMPANY. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Font Awesome (아이콘 사용 시 필요) -->
-  <script src="https://kit.fontawesome.com/yourfontawesomekey.js" crossorigin="anonymous"></script>
 </body>
 </html>
