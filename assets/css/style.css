@@ -122,7 +122,7 @@ img{ max-width:100%; display:block; }
 }
 .hero__title{
     margin:0;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1.25;
     text-shadow: 0 12px 30px rgba(0,0,0,.45);
 }
@@ -196,19 +196,45 @@ img{ max-width:100%; display:block; }
     justify-content:center;
     padding: 11px 14px;
     border-radius: 12px;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--text);
+    cursor:pointer;
+}
+.btn:hover{ background: #f7f8fb; }
+
+.btn--primary{
+    border-color: rgba(245,158,11,.45);
+    background: rgba(245,158,11,.18);
+    color: #7a2e00;
+}
+.btn--ghost{
+    border-color: var(--line);
+    background: transparent;
+    color: var(--text);
+}
+
+/* 어두운 배경(히어로/로케이션)에서는 버튼을 흰색 텍스트로 */
+.hero .btn,
+.location .btn{
     border: 1px solid rgba(255,255,255,.22);
     background: rgba(255,255,255,.10);
     color: #fff;
-    cursor:pointer;
 }
-.btn:hover{ background: rgba(255,255,255,.16); }
-.btn--primary{
+.hero .btn:hover,
+.location .btn:hover{
+    background: rgba(255,255,255,.16);
+}
+.hero .btn--primary{
     border-color: rgba(245,158,11,.35);
     background: rgba(245,158,11,.22);
+    color: #fff;
 }
-.btn--ghost{
+.hero .btn--ghost,
+.location .btn--ghost{
     border-color: rgba(255,255,255,.35);
     background: rgba(255,255,255,.10);
+    color: #fff;
 }
 
 .section{

@@ -66,7 +66,7 @@
 
       <div class="cards">
         <article class="card">
-          <h3 class="card__title">리틀야구단만의 장점</h3>
+          <h3 class="card__title">양천리틀 야구단만의 장점</h3>
           <ul class="checklist">
             <li>평일반/주말반 운영</li>
             <li>기본기 · 체력 · 연습게임 · 예의범절</li>
@@ -270,20 +270,24 @@
 
         <article class="card">
           <h3 class="card__title">문의 남기기</h3>
-          <form class="form" onsubmit="return window.App.fakeSubmit(event)">
+          <form class="form" onsubmit="return window.App.sendInquiry(event)">
             <label class="field">
               <span>이름</span>
-              <input required placeholder="예: 홍길동" />
+              <input id="inqName" name="name" required placeholder="예: 홍길동" />
             </label>
             <label class="field">
               <span>연락처</span>
-              <input required placeholder="예: [전화번호]" />
+              <input id="inqContact" name="contact" required placeholder="예: [전화번호]" />
             </label>
+            <!-- Honeypot (spam bots often fill this; humans won't see it) -->
+            <input id="inqCompany" name="company" autocomplete="off" tabindex="-1"
+                   style="position:absolute;left:-9999px;height:0;width:0;opacity:0;" />
+
             <label class="field">
               <span>내용</span>
-              <textarea required placeholder="입단 문의 / 일정 문의 등"></textarea>
+              <textarea id="inqMessage" name="message" required placeholder="입단 문의 / 일정 문의 등"></textarea>
             </label>
-            <button class="btn" type="submit">내용 확인</button>
+            <button class="btn btn--primary" type="submit">메일로 보내기</button>
             <p class="form__result" id="formResult" hidden></p>
           </form>
         </article>
