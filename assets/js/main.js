@@ -9,7 +9,7 @@ window.App = (() => {
     let timerId = null;
 
     // Google Apps Script Web App (provided)
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwWMN8dVOCW5oum73oxLvDnLsSpA5-xhvB13wYi-HMQCoJOAyrBr7zMImbixaTEqc7oeQ/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwlpuFFytwvD7878eKTk21Nfwg7I3bNlo2DUbzHZBE_Yt7iqP3CGtM2ZUoZbVL4cFQpdg/exec";
 
     // If your Apps Script validates a secret, set the same value here.
     // If you removed SECRET check from Apps Script, you can keep this empty and remove it from payload.
