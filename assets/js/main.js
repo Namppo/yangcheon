@@ -83,10 +83,14 @@ window.App = (() => {
             `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/issues` +
             `?q=is%3Aissue+is%3Aopen+label%3A${encodeURIComponent(SCHEDULE_LABEL)}+sort%3Acreated-desc`;
 
+        const templateTitle = "2026-02-09 14:00 양천리틀 VS 구로리틀 (안양천 야구장)";
+        const templateBody = "5 VS 4";
+
         const newIssueUrl =
             `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/issues/new` +
             `?labels=${encodeURIComponent(SCHEDULE_LABEL)}` +
-            `&title=${encodeURIComponent("YYYY-MM-DD (hh:mm) VS 상대팀 (대회명)")}`;
+            `&title=${encodeURIComponent(templateTitle)}` +
+            `&body=${encodeURIComponent(templateBody)}`;
 
         if (allBtn) allBtn.href = issuesUrl;
         if (writeBtn) writeBtn.href = newIssueUrl;
