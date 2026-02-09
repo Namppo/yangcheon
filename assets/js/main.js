@@ -17,6 +17,11 @@ window.App = (() => {
 
     const GALLERY_PAGE_SIZE = 4;
 
+    const SCHEDULE_SHOW_COUNT = 3;
+    const GITHUB_OWNER = "Namppo";
+    const GITHUB_REPO = "yangcheon";
+    const SCHEDULE_LABEL = "schedule";
+
     function setHero(i){
         idx = (i + heroImages.length) % heroImages.length;
 
@@ -66,6 +71,67 @@ window.App = (() => {
         }, { threshold: [0.25, 0.4, 0.6] });
 
         targets.forEach(t => io.observe(t));
+    }
+
+    async function renderScheduleBoard(){
+        const listEl = document.getElementById("scheduleList");
+        const allBtn = document.getElementById("scheduleAllBtn");
+        const writeBtn = document.getElementById("scheduleWriteBtn");
+        if (!listEl) return;
+
+        const issuesUrl =
+            `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/issues` +
+            `?q=is%3Aissue+is%3Aopen+label%3A${encodeURIComponent(SCHEDULE_LABEL)}+sort%3Acreated-desc`;
+
+        const newIssueUrl =
+            `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/issues/new` +
+            `?labels=${encodeURIComponent(SCHEDULE_LABEL)}` +
+            `&title=${encodeURIComponent("YYYY-MM-DD (hh:mm) VS 상대팀 (대회명)")}`;
+
+        if (allBtn) allBtn.href = issuesUrl;
+        if (writeBtn) writeBtn.href = newIssueUrl;
+
+        try {
+            const apiUrl =
+                `https://api.github.com/repos/${encodeURIComponent(GITHUB_OWNER)}/${encodeURIComponent(GITHUB_REPO)}/issues` +
+                `?state=open&labels=${encodeURIComponent(SCHEDULE_LABEL)}` +
+                `&per_page=${SCHEDULE_SHOW_COUNT}&sort=created&direction=desc`;
+
+            const resp = await fetch(apiUrl, {
+                cache: "no-store",
+                headers: { "Accept": "application/vnd.github+json" }
+            });
+
+            if (!resp.ok) throw new Error("GitHub API failed");
+
+            const issues = await resp.json().catch(() => []);
+            listEl.innerHTML = "";
+
+            if (!Array.isArray(issues) || issues.length === 0) {
+                const li = document.createElement("li");
+                li.className = "muted";
+                li.textContent = "등록된 일정이 없습니다. (schedule 라벨로 이슈를 작성해 주세요)";
+                listEl.appendChild(li);
+                return;
+            }
+
+            for (const it of issues) {
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.href = it.html_url;
+                a.target = "_blank";
+                a.rel = "noreferrer";
+                a.textContent = it.title || "제목 없음";
+                li.appendChild(a);
+                listEl.appendChild(li);
+            }
+        } catch (e) {
+            listEl.innerHTML = "";
+            const li = document.createElement("li");
+            li.className = "muted";
+            li.textContent = "일정을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.";
+            listEl.appendChild(li);
+        }
     }
 
     async function renderGallery(){
@@ -199,6 +265,7 @@ window.App = (() => {
         setHero(0);
         bindHeroNav();
         bindActiveMenu();
+        renderScheduleBoard();
         renderGallery();
         restartAuto();
     }

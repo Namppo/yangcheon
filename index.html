@@ -258,6 +258,38 @@
     </div>
   </section>
 
+  <!-- SCHEDULE BOARD (GitHub Issues) -->
+  <section class="section section--alt" id="schedule">
+    <div class="container">
+      <div class="section__head">
+        <h2 class="section__title">경기 일정</h2>
+        <p class="section__desc">일정 작성/수정은 GitHub 로그인 후 가능합니다.</p>
+      </div>
+
+      <div class="cards cards--2">
+        <article class="card" style="grid-column: span 12;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+            <h3 class="card__title" style="margin:0;">최근 일정 3개</h3>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn" id="scheduleAllBtn" href="#" target="_blank" rel="noreferrer">전체 보기</a>
+              <a class="btn btn--primary" id="scheduleWriteBtn" href="#" target="_blank" rel="noreferrer">
+                일정 작성(로그인)
+              </a>
+            </div>
+          </div>
+
+          <ul class="bullets" id="scheduleList" style="margin-top:12px;">
+            <li class="muted">불러오는 중...</li>
+          </ul>
+
+          <p class="muted" style="margin-top:10px;">
+            일정 글은 Issues에서 <strong>schedule</strong> 라벨을 붙여 작성해 주세요.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- GALLERY PREVIEW -->
   <section class="section section--tight" id="gallery">
     <div class="container gallery">
