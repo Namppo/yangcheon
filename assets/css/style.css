@@ -265,6 +265,14 @@ img{ max-width:100%; display:block; }
 .cards--2 .card{ grid-column: span 6; }
 .cards--3 .card{ grid-column: span 4; }
 
+/* INTRO 섹션 카드: 기본은 50% / 50% */
+#intro .cards{
+    grid-template-columns: 1fr 1fr;
+}
+#intro .cards > .card{
+    grid-column: auto;
+}
+
 .card{
     grid-column: span 4;
     padding: 16px 16px;
@@ -547,6 +555,9 @@ textarea{ min-height: 110px; resize: vertical; }
     .gallery{ grid-template-columns: 1fr; }
     .cards--2 .card, .cards--3 .card, .card{ grid-column: span 12; }
     .footer__grid{ grid-template-columns: 1fr; }
+
+    /* (추가) 핸드폰에서는 INTRO 카드 1열 */
+    #intro .cards{ grid-template-columns: 1fr; }
 }
 
 
