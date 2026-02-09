@@ -534,3 +534,57 @@ textarea{ min-height: 110px; resize: vertical; }
     .cards--2 .card, .cards--3 .card, .card{ grid-column: span 12; }
     .footer__grid{ grid-template-columns: 1fr; }
 }
+
+
+/* Modal */
+.modal[hidden]{ display:none; }
+.modal{
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+}
+.modal__backdrop{
+    position:absolute;
+    inset:0;
+    background: rgba(0,0,0,.55);
+}
+.modal__panel{
+    position: relative;
+    width: min(900px, calc(100vw - 24px));
+    max-height: calc(100vh - 24px);
+    margin: 12px auto;
+    border-radius: 16px;
+    border: 1px solid rgba(16,24,40,.10);
+    background: #fff;
+    box-shadow: 0 30px 90px rgba(16,24,40,.35);
+    overflow: hidden;
+    display:flex;
+    flex-direction: column;
+}
+.modal__head{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+}
+.modal__title{
+    margin:0;
+    font-size: 16px;
+}
+.modal__close{
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+}
+.modal__close:hover{ background:#f7f8fb; }
+.modal__body{
+    padding: 16px;
+    overflow: auto;
+}

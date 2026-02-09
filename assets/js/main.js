@@ -83,16 +83,20 @@ window.App = (() => {
             `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/issues` +
             `?q=is%3Aissue+is%3Aopen+label%3A${encodeURIComponent(SCHEDULE_LABEL)}+sort%3Acreated-desc`;
 
-        const templateTitle = "2026-02-09 14:00 양천리틀 VS 구로리틀 (안양천 야구장)";
-        const templateBody = "5 VS 4";
+        const templateTitle = "2026-02-09 14:00 양천리틀 5 VS 4 구로리틀 (안양천 야구장)";
 
         const newIssueUrl =
             `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/issues/new` +
             `?labels=${encodeURIComponent(SCHEDULE_LABEL)}` +
-            `&title=${encodeURIComponent(templateTitle)}` +
-            `&body=${encodeURIComponent(templateBody)}`;
+            `&title=${encodeURIComponent(templateTitle)}`;
 
-        if (allBtn) allBtn.href = issuesUrl;
+        if (allBtn) {
+            allBtn.href = issuesUrl; // JS 꺼져있을 때 백업 링크
+            allBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                openScheduleModal();
+            });
+        }
         if (writeBtn) writeBtn.href = newIssueUrl;
 
         try {
@@ -135,6 +139,51 @@ window.App = (() => {
             li.className = "muted";
             li.textContent = "일정을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.";
             listEl.appendChild(li);
+        }
+    }
+
+    async function openScheduleModal(){
+        const modalApi = bindScheduleModal();
+        const modal = document.getElementById("scheduleModal");
+        const listEl = document.getElementById("scheduleModalList");
+        const openGithub = document.getElementById("scheduleModalOpenGithub");
+        if (!modalApi || !modal || !listEl) return;
+
+        const issuesUrl =
+            `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/issues` +
+            `?q=is%3Aissue+is%3Aopen+label%3A${encodeURIComponent(SCHEDULE_LABEL)}+sort%3Acreated-desc`;
+
+        if (openGithub) openGithub.href = issuesUrl;
+
+        listEl.innerHTML = `<li class="muted">불러오는 중...</li>`;
+        modalApi.open();
+
+        try {
+            const issues = await loadAllScheduleIssues();
+            listEl.innerHTML = "";
+
+            if (!issues.length) {
+                const li = document.createElement("li");
+                li.className = "muted";
+                li.textContent = "등록된 일정이 없습니다.";
+                listEl.appendChild(li);
+                return;
+            }
+
+            for (const it of issues) {
+                const li = document.createElement("li");
+
+                const a = document.createElement("a");
+                a.href = it.html_url;
+                a.target = "_blank";
+                a.rel = "noreferrer";
+                a.textContent = it.title || "제목 없음";
+
+                li.appendChild(a);
+                listEl.appendChild(li);
+            }
+        } catch (e) {
+            listEl.innerHTML = `<li class="muted">불러오기 실패. 잠시 후 다시 시도해 주세요.</li>`;
         }
     }
 
