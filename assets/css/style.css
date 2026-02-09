@@ -284,6 +284,12 @@ img{ max-width:100%; display:block; }
     color: #101828;
 }
 
+/* (추가) 가입 상담 제목은 조금 더 크게/강하게 */
+.card__subtitle--counsel{
+    font-size: 16px;
+    margin-top: 16px; /* 장점 리스트와 구분 조금 주기 (원하면 12px로 줄여도 됨) */
+}
+
 .muted{ color: var(--muted); margin: 0; }
 .big-tel{
     margin: 10px 0 6px;
