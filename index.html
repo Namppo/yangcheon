@@ -260,6 +260,34 @@
     </div>
   </section>
 
+  <!-- SCHEDULE BOARD (GitHub Issues) -->
+  <section class="section section--alt" id="schedule">
+    <div class="container">
+      <div class="section__head">
+        <h2 class="section__title">경기 일정</h2>
+      </div>
+
+      <div class="cards cards--2">
+        <article class="card" style="grid-column: span 12;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+            <h3 class="card__title" style="margin:0;">최근 일정</h3>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn" id="scheduleAllBtn" href="#" target="_blank" rel="noreferrer">전체 보기</a>
+              <a class="btn btn--primary" id="scheduleWriteBtn" href="#" target="_blank" rel="noreferrer">
+                일정 작성(로그인)
+              </a>
+            </div>
+          </div>
+
+          <ul class="bullets" id="scheduleList" style="margin-top:12px;">
+            <li class="muted">불러오는 중...</li>
+          </ul>
+
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- GALLERY PREVIEW -->
   <section class="section section--tight" id="gallery">
     <div class="container gallery">
@@ -362,6 +390,28 @@
     <a class="to-top" href="#home" aria-label="위로">↑</a>
   </div>
 </footer>
+
+<!-- Schedule Popup (Modal) -->
+<div class="modal" id="scheduleModal" hidden aria-hidden="true">
+  <div class="modal__backdrop" data-modal-close></div>
+
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="scheduleModalTitle">
+    <div class="modal__head">
+      <h3 class="modal__title" id="scheduleModalTitle">경기 일정 전체 보기</h3>
+      <button class="modal__close" type="button" data-modal-close aria-label="닫기">×</button>
+    </div>
+
+    <div class="modal__body">
+      <ul class="bullets" id="scheduleModalList">
+        <li class="muted">불러오는 중...</li>
+      </ul>
+
+      <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn--primary" type="button" data-modal-close>닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="assets/js/main.js"></script>
 <script>

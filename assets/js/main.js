@@ -119,7 +119,12 @@ window.App = (() => {
 
     async function renderScheduleBoard(){
         const listEl = document.getElementById("scheduleList");
-        const allBtn = document.getElementById("scheduleAllBtn");
+        if (allBtn) {
+            allBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                openScheduleModal();
+            });
+        }
         const writeBtn = document.getElementById("scheduleWriteBtn");
         if (!listEl) return;
 
