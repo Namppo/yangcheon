@@ -276,6 +276,14 @@ img{ max-width:100%; display:block; }
 .card__title{ margin:0 0 10px; font-size: 16px; }
 .card__actions{ margin-top: 12px; display:flex; gap: 10px; flex-wrap: wrap; }
 
+/* (추가) h4 기본 여백 제거/조정: 학력/경력/수상·자격 아래 '한 칸' 제거 */
+.card__subtitle{
+    margin: 12px 0 6px; /* 위 12px, 아래 6px (원하면 더 줄여도 됨) */
+    font-size: 14px;
+    font-weight: 800;
+    color: #101828;
+}
+
 .muted{ color: var(--muted); margin: 0; }
 .big-tel{
     margin: 10px 0 6px;
