@@ -328,7 +328,6 @@ img{ max-width:100%; display:block; }
     color: #d92d20;
     font-weight: 900;
 }
-
 /* Simple bullets */
 .bullets{
     margin:0;
@@ -336,6 +335,19 @@ img{ max-width:100%; display:block; }
     color: #344054;
 }
 .bullets li{ margin: 7px 0; }
+
+/* (추가) 경기 일정 목록: 2줄 표시 + 항목 사이 간격 */
+.schedule-item{ margin: 14px 0; }
+.schedule-item__date{
+    font-weight: 800;
+    color: #101828;
+    line-height: 1.25;
+}
+.schedule-item__match{
+    margin-top: 4px;
+    color: #344054;
+    line-height: 1.3;
+}
 
 /* Badge grid */
 .badge-grid{

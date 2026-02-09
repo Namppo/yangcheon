@@ -123,25 +123,7 @@ window.App = (() => {
         const writeBtn = document.getElementById("scheduleWriteBtn");
         if (!listEl) return;
 
-        const issuesUrl =
-            `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/issues` +
-            `?q=is%3Aissue+is%3Aopen+label%3A${encodeURIComponent(SCHEDULE_LABEL)}+sort%3Acreated-desc`;
-
-        const templateTitle = "2026-02-09 14:00 양천리틀 5 VS 4 구로리틀 (안양천 야구장)";
-
-        const newIssueUrl =
-            `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/issues/new` +
-            `?labels=${encodeURIComponent(SCHEDULE_LABEL)}` +
-            `&title=${encodeURIComponent(templateTitle)}`;
-
-        if (allBtn) {
-            allBtn.href = issuesUrl;
-            allBtn.addEventListener("click", (e) => {
-                e.preventDefault();
-                openScheduleModal();
-            });
-        }
-        if (writeBtn) writeBtn.href = newIssueUrl;
+        // ... existing code ...
 
         try {
             const apiUrl =
@@ -169,11 +151,31 @@ window.App = (() => {
 
             for (const it of issues) {
                 const li = document.createElement("li");
+                li.classList.add("schedule-item");
+
                 const a = document.createElement("a");
                 a.href = it.html_url;
                 a.target = "_blank";
                 a.rel = "noreferrer";
-                a.textContent = it.title || "제목 없음";
+
+                const title = (it.title || "").trim();
+                const m = title.match(/^(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})\s+(.*)$/);
+
+                if (m) {
+                    const line1 = document.createElement("div");
+                    line1.className = "schedule-item__date";
+                    line1.textContent = m[1];
+
+                    const line2 = document.createElement("div");
+                    line2.className = "schedule-item__match";
+                    line2.textContent = m[2];
+
+                    a.appendChild(line1);
+                    a.appendChild(line2);
+                } else {
+                    a.textContent = title || "제목 없음";
+                }
+
                 li.appendChild(a);
                 listEl.appendChild(li);
             }
@@ -193,14 +195,7 @@ window.App = (() => {
         const openGithub = document.getElementById("scheduleModalOpenGithub");
         if (!modalApi || !modal || !listEl) return;
 
-        const issuesUrl =
-            `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/issues` +
-            `?q=is%3Aissue+is%3Aopen+label%3A${encodeURIComponent(SCHEDULE_LABEL)}+sort%3Acreated-desc`;
-
-        if (openGithub) openGithub.href = issuesUrl;
-
-        listEl.innerHTML = `<li class="muted">불러오는 중...</li>`;
-        modalApi.open();
+        // ... existing code ...
 
         try {
             const issues = await loadAllScheduleIssues();
@@ -216,12 +211,30 @@ window.App = (() => {
 
             for (const it of issues) {
                 const li = document.createElement("li");
+                li.classList.add("schedule-item");
 
                 const a = document.createElement("a");
                 a.href = it.html_url;
                 a.target = "_blank";
                 a.rel = "noreferrer";
-                a.textContent = it.title || "제목 없음";
+
+                const title = (it.title || "").trim();
+                const m = title.match(/^(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})\s+(.*)$/);
+
+                if (m) {
+                    const line1 = document.createElement("div");
+                    line1.className = "schedule-item__date";
+                    line1.textContent = m[1];
+
+                    const line2 = document.createElement("div");
+                    line2.className = "schedule-item__match";
+                    line2.textContent = m[2];
+
+                    a.appendChild(line1);
+                    a.appendChild(line2);
+                } else {
+                    a.textContent = title || "제목 없음";
+                }
 
                 li.appendChild(a);
                 listEl.appendChild(li);
