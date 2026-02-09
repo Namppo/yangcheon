@@ -568,10 +568,14 @@ textarea{ min-height: 110px; resize: vertical; }
     .cards--2 .card, .cards--3 .card, .card{ grid-column: span 12; }
     .footer__grid{ grid-template-columns: 1fr; }
 
-    /* (추가) 핸드폰에서는 INTRO 카드 1열 */
-    #intro .cards{ grid-template-columns: 1fr; }
 }
 
+/* (추가) 진짜 핸드폰 구간에서만 INTRO 1열 */
+@media (max-width: 640px){
+    #intro .cards{
+        grid-template-columns: 1fr;
+    }
+}
 
 /* Modal */
 .modal[hidden]{ display:none; }
@@ -625,3 +629,4 @@ textarea{ min-height: 110px; resize: vertical; }
     padding: 16px;
     overflow: auto;
 }
+#intro .cards{ grid-template-columns: 1fr; }
