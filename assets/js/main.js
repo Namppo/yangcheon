@@ -73,6 +73,50 @@ window.App = (() => {
         targets.forEach(t => io.observe(t));
     }
 
+    function bindScheduleModal(){
+        const modal = document.getElementById("scheduleModal");
+        if (!modal) return null;
+
+        function close(){
+            modal.hidden = true;
+            modal.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
+        }
+
+        function open(){
+            modal.hidden = false;
+            modal.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+        }
+
+        modal.querySelectorAll("[data-modal-close]").forEach(el => {
+            el.addEventListener("click", close);
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && !modal.hidden) close();
+        });
+
+        return { open, close };
+    }
+
+    async function loadAllScheduleIssues(){
+        const apiUrl =
+            `https://api.github.com/repos/${encodeURIComponent(GITHUB_OWNER)}/${encodeURIComponent(GITHUB_REPO)}/issues` +
+            `?state=open&labels=${encodeURIComponent(SCHEDULE_LABEL)}` +
+            `&per_page=100&sort=created&direction=desc`;
+
+        const resp = await fetch(apiUrl, {
+            cache: "no-store",
+            headers: { "Accept": "application/vnd.github+json" }
+        });
+
+        if (!resp.ok) throw new Error("GitHub API failed");
+
+        const issues = await resp.json().catch(() => []);
+        return Array.isArray(issues) ? issues : [];
+    }
+
     async function renderScheduleBoard(){
         const listEl = document.getElementById("scheduleList");
         const allBtn = document.getElementById("scheduleAllBtn");
@@ -91,7 +135,7 @@ window.App = (() => {
             `&title=${encodeURIComponent(templateTitle)}`;
 
         if (allBtn) {
-            allBtn.href = issuesUrl; // JS 꺼져있을 때 백업 링크
+            allBtn.href = issuesUrl;
             allBtn.addEventListener("click", (e) => {
                 e.preventDefault();
                 openScheduleModal();
