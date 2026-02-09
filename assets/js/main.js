@@ -15,6 +15,8 @@ window.App = (() => {
     // If you removed SECRET check from Apps Script, you can keep this empty and remove it from payload.
     const WEB_APP_SECRET = "CHANGE_ME_TO_A_RANDOM_STRING";
 
+    const GALLERY_PAGE_SIZE = 4;
+
     function setHero(i){
         idx = (i + heroImages.length) % heroImages.length;
 
@@ -64,6 +66,64 @@ window.App = (() => {
         }, { threshold: [0.25, 0.4, 0.6] });
 
         targets.forEach(t => io.observe(t));
+    }
+
+    async function renderGallery(){
+        const grid = document.getElementById("galleryGrid");
+        const moreWrap = document.getElementById("galleryMoreWrap");
+        const moreBtn = document.getElementById("galleryMoreBtn");
+        if (!grid) return;
+
+        function createThumb(it){
+            const a = document.createElement("a");
+            a.className = "thumb";
+            a.href = it.href || it.src;
+            a.target = "_blank";
+            a.rel = "noreferrer";
+
+            const img = document.createElement("img");
+            img.src = it.src;
+            img.alt = it.alt || "갤러리 사진";
+            img.loading = "lazy";
+
+            a.appendChild(img);
+            return a;
+        }
+
+        try {
+            const resp = await fetch("gallery.json", { cache: "no-store" });
+            if (!resp.ok) return;
+
+            const data = await resp.json().catch(() => null);
+            const items = Array.isArray(data) ? data : Array.isArray(data?.items) ? data.items : [];
+
+            let shownCount = 0;
+
+            function renderNext(){
+                const next = items.slice(shownCount, shownCount + GALLERY_PAGE_SIZE);
+                for (const it of next) {
+                    if (!it || !it.src) continue;
+                    grid.appendChild(createThumb(it));
+                }
+                shownCount += next.length;
+
+                const hasMore = shownCount < items.length;
+                if (moreWrap) moreWrap.hidden = !hasMore;
+                if (moreBtn) moreBtn.disabled = !hasMore;
+            }
+
+            // 초기 렌더: 최신 4개
+            grid.innerHTML = "";
+            shownCount = 0;
+            renderNext();
+
+            // 더보기 핸들러(중복 바인딩 방지)
+            if (moreBtn) {
+                moreBtn.onclick = () => renderNext();
+            }
+        } catch (e) {
+            // 실패 시 그냥 기존 UI(빈 상태) 유지
+        }
     }
 
     function fakeSubmit(e){
@@ -139,6 +199,7 @@ window.App = (() => {
         setHero(0);
         bindHeroNav();
         bindActiveMenu();
+        renderGallery();
         restartAuto();
     }
 

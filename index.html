@@ -268,19 +268,11 @@
         <a class="btn btn--primary" href="#contact">상담 바로가기</a>
       </div>
 
-      <div class="gallery__grid">
-        <a class="thumb" href="assets/img/gallary-1.jpg" target="_blank" rel="noreferrer">
-          <img src="assets/img/gallary-1.jpg" alt="갤러리 사진 1" />
-        </a>
-        <a class="thumb" href="assets/img/gallary-2.jpg" target="_blank" rel="noreferrer">
-          <img src="assets/img/gallary-2.jpg" alt="갤러리 사진 2" />
-        </a>
-        <a class="thumb" href="assets/img/gallary-3.jpg" target="_blank" rel="noreferrer">
-          <img src="assets/img/gallary-3.jpg" alt="갤러리 사진 3" />
-        </a>
-        <a class="thumb" href="assets/img/gallary-4.jpg" target="_blank" rel="noreferrer">
-          <img src="assets/img/gallary-4.jpg" alt="갤러리 사진 4" />
-        </a>
+      <div class="gallery__grid" id="galleryGrid">
+        <!-- gallery.json을 읽어서 main.js가 여기에 자동으로 썸네일을 생성합니다 -->
+      </div>
+      <div id="galleryMoreWrap" style="width:100%; text-align:center; margin-top:16px;" hidden>
+        <button class="btn" id="galleryMoreBtn" type="button">더보기</button>
       </div>
     </div>
   </section>
