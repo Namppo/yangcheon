@@ -17,10 +17,6 @@ window.App = (() => {
 
     const GALLERY_PAGE_SIZE = 4;
 
-    const SCHEDULE_SHOW_COUNT = 3;
-    const GITHUB_OWNER = "Namppo";
-    const GITHUB_REPO = "yangcheon";
-    const SCHEDULE_LABEL = "schedule";
 
     function setHero(i){
         idx = (i + heroImages.length) % heroImages.length;
@@ -71,182 +67,6 @@ window.App = (() => {
         }, { threshold: [0.25, 0.4, 0.6] });
 
         targets.forEach(t => io.observe(t));
-    }
-
-    function bindScheduleModal(){
-        const modal = document.getElementById("scheduleModal");
-        if (!modal) return null;
-
-        function close(){
-            modal.hidden = true;
-            modal.setAttribute("aria-hidden", "true");
-            document.body.style.overflow = "";
-        }
-
-        function open(){
-            modal.hidden = false;
-            modal.setAttribute("aria-hidden", "false");
-            document.body.style.overflow = "hidden";
-        }
-
-        modal.querySelectorAll("[data-modal-close]").forEach(el => {
-            el.addEventListener("click", close);
-        });
-
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && !modal.hidden) close();
-        });
-
-        return { open, close };
-    }
-
-    async function loadAllScheduleIssues(){
-        const apiUrl =
-            `https://api.github.com/repos/${encodeURIComponent(GITHUB_OWNER)}/${encodeURIComponent(GITHUB_REPO)}/issues` +
-            `?state=open&labels=${encodeURIComponent(SCHEDULE_LABEL)}` +
-            `&per_page=100&sort=created&direction=desc`;
-
-        const resp = await fetch(apiUrl, {
-            cache: "no-store",
-            headers: { "Accept": "application/vnd.github+json" }
-        });
-
-        if (!resp.ok) throw new Error("GitHub API failed");
-
-        const issues = await resp.json().catch(() => []);
-        return Array.isArray(issues) ? issues : [];
-    }
-
-    async function renderScheduleBoard(){
-        const listEl = document.getElementById("scheduleList");
-        if (allBtn) {
-            allBtn.addEventListener("click", (e) => {
-                e.preventDefault();
-                openScheduleModal();
-            });
-        }
-        const writeBtn = document.getElementById("scheduleWriteBtn");
-        if (!listEl) return;
-
-        // ... existing code ...
-
-        try {
-            const apiUrl =
-                `https://api.github.com/repos/${encodeURIComponent(GITHUB_OWNER)}/${encodeURIComponent(GITHUB_REPO)}/issues` +
-                `?state=open&labels=${encodeURIComponent(SCHEDULE_LABEL)}` +
-                `&per_page=${SCHEDULE_SHOW_COUNT}&sort=created&direction=desc`;
-
-            const resp = await fetch(apiUrl, {
-                cache: "no-store",
-                headers: { "Accept": "application/vnd.github+json" }
-            });
-
-            if (!resp.ok) throw new Error("GitHub API failed");
-
-            const issues = await resp.json().catch(() => []);
-            listEl.innerHTML = "";
-
-            if (!Array.isArray(issues) || issues.length === 0) {
-                const li = document.createElement("li");
-                li.className = "muted";
-                li.textContent = "등록된 일정이 없습니다. (schedule 라벨로 이슈를 작성해 주세요)";
-                listEl.appendChild(li);
-                return;
-            }
-
-            for (const it of issues) {
-                const li = document.createElement("li");
-                li.classList.add("schedule-item");
-
-                const a = document.createElement("a");
-                a.href = it.html_url;
-                a.target = "_blank";
-                a.rel = "noreferrer";
-
-                const title = (it.title || "").trim();
-                const m = title.match(/^(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})\s+(.*)$/);
-
-                if (m) {
-                    const line1 = document.createElement("div");
-                    line1.className = "schedule-item__date";
-                    line1.textContent = m[1];
-
-                    const line2 = document.createElement("div");
-                    line2.className = "schedule-item__match";
-                    line2.textContent = m[2];
-
-                    a.appendChild(line1);
-                    a.appendChild(line2);
-                } else {
-                    a.textContent = title || "제목 없음";
-                }
-
-                li.appendChild(a);
-                listEl.appendChild(li);
-            }
-        } catch (e) {
-            listEl.innerHTML = "";
-            const li = document.createElement("li");
-            li.className = "muted";
-            li.textContent = "일정을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.";
-            listEl.appendChild(li);
-        }
-    }
-
-    async function openScheduleModal(){
-        const modalApi = bindScheduleModal();
-        const modal = document.getElementById("scheduleModal");
-        const listEl = document.getElementById("scheduleModalList");
-        const openGithub = document.getElementById("scheduleModalOpenGithub");
-        if (!modalApi || !modal || !listEl) return;
-
-        // ... existing code ...
-
-        try {
-            const issues = await loadAllScheduleIssues();
-            listEl.innerHTML = "";
-
-            if (!issues.length) {
-                const li = document.createElement("li");
-                li.className = "muted";
-                li.textContent = "등록된 일정이 없습니다.";
-                listEl.appendChild(li);
-                return;
-            }
-
-            for (const it of issues) {
-                const li = document.createElement("li");
-                li.classList.add("schedule-item");
-
-                const a = document.createElement("a");
-                a.href = it.html_url;
-                a.target = "_blank";
-                a.rel = "noreferrer";
-
-                const title = (it.title || "").trim();
-                const m = title.match(/^(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})\s+(.*)$/);
-
-                if (m) {
-                    const line1 = document.createElement("div");
-                    line1.className = "schedule-item__date";
-                    line1.textContent = m[1];
-
-                    const line2 = document.createElement("div");
-                    line2.className = "schedule-item__match";
-                    line2.textContent = m[2];
-
-                    a.appendChild(line1);
-                    a.appendChild(line2);
-                } else {
-                    a.textContent = title || "제목 없음";
-                }
-
-                li.appendChild(a);
-                listEl.appendChild(li);
-            }
-        } catch (e) {
-            listEl.innerHTML = `<li class="muted">불러오기 실패. 잠시 후 다시 시도해 주세요.</li>`;
-        }
     }
 
     async function renderGallery(){
@@ -380,7 +200,6 @@ window.App = (() => {
         setHero(0);
         bindHeroNav();
         bindActiveMenu();
-        renderScheduleBoard();
         renderGallery();
         restartAuto();
     }
